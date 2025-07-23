@@ -339,10 +339,15 @@ footer .credit a {
 }
 
 /* tablet */
-@media (max-width: 758px) {
+@media (max-width: 768px) {
   html {
     font-size: 62.5%;
   }
+  .container {
+    padding: 24px;
+    flex-direction: column;
+  }
+
 
   #hamburger-menu {
     display: inline-block;
