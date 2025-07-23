@@ -6,6 +6,7 @@
 * {
   margin: 0;
   padding: 0;
+  max-width: 100%;
   box-sizing: border-box;
   outline: none;
   border: none;
