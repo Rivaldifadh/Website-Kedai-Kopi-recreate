@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const message = `Halo, saya ingin memesan produk:\n${productName}`;
       const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-        message
+        message,
       )}`;
 
       window.open(waUrl, "_blank");
@@ -93,6 +93,29 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==========================
      MODAL DETAIL PRODUK
   ========================== */
+  document.addEventListener("scroll", () => {
+    const items = document.querySelectorAll(".about .row .content p");
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add("active");
+            }, index * 200); // delay antar paragraf
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 },
+    );
+
+    items.forEach((el) => observer.observe(el));
+  });
+
+  // ====================================================
+
   itemDetailButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -147,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const phoneNumber = "6283128723888";
       const messages = `Halo, saya ${name}\nEmail: ${email}\n ${message}`;
       const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-        messages
+        messages,
       )}`;
 
       window.open(waUrl, "_blank");
