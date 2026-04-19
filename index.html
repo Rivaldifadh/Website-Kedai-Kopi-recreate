@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Website Kedai Kopi</title>
 
+    <meta name="description" content="Website kedai kopi Kenangan Senja dengan kopi terbaik dan suasana hangat">
+    <meta name="keywords" content="kopi, coffee shop, kenangan senja, kedai kopi">
+
+
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,7 +17,7 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/feather-icons"></script>
-    <link rel="stylesheet" href="GAYA.css"/>
+    <link rel="stylesheet" href="style.css"/>
   </head>
   <body>
     <!-- navbar start -->
@@ -82,7 +86,7 @@
       <main class="content">
         <h1>Mari nikmati segelas <span>kopi</span></h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, quos!</p>
-        <a href="#" class="cta">Beli Sekarang</a>
+        <a href="#" class="cta-order" data-product="">Beli Sekarang</a>
       </main>
      </section>
     <!-- hero section -->
@@ -111,21 +115,19 @@
       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis officiis eius ut tempore inventore repellat velit hic debitis necessitatibus, in, asperiores nisi optio accusamus unde, deleniti reiciendis! Tenetur, molestias sint.
 
       <div class="row">
-        <div class="menu card">
+        <div class="menu-card">
           <img src="menu-kopi.jpg" alt="Coffe Latte" class="menu-card-img">
           <h3 class="menu-card-title">~Latte Espreso~</h3>
           <p class="menu-card-price"><b>IDR 20 K</b></p>
         </div>
 
-        <div class="row">
-        <div class="menu card">
+        <div class="menu-card">
           <img src="menu-kopi.jpg" alt="Coffe Latte" class="menu-card-img">
           <h3 class="menu-card-title">~Latte Espreso~</h3>
           <p class="menu-card-price"><b>IDR 20 K</b></p>
         </div>
 
-        <div class="row">
-        <div class="menu card">
+        <div class="menu-card">
           <img src="menu-kopi.jpg" alt="Coffe Latte" class="menu-card-img">
           <h3 class="menu-card-title">~Latte Espreso~</h3>
           <p class="menu-card-price"><b>IDR 20 K</b></p>
@@ -208,26 +210,25 @@
 
      <!-- contact section -->
       <section id="contact" class="contact">
-        <h2><span>Kontak</span> Kami</span></h2>
+        <h2><span>Kontak</span> Kami</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis officiis eius ut tempore inventore repellat velit hic debitis necessitatibus, in, asperiores nisi optio accusamus unde, deleniti reiciendis! Tenetur, molestias sint.
           
         <div class="row">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.8560044159167!2d107.60621487265257!3d-6.9078162676003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e7cdf9410439%3A0xd75e3bea3b5242b2!2sIstana%20BEC%20Bandung!5e0!3m2!1sen!2sid!4v1753024456929!5m2!1sen!2sid" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
-          
           <form action="">
-            <div class="input-group">
-              <i data data-feather="user"></i>
-              <input type="text" placeholder="nama">
-            </div>
-            <div class="input-group">
-              <i data data-feather="mail"></i>
-              <input type="text" placeholder="email">
-            </div>
-            <div class="input-group">
-              <i data data-feather="phone"></i>
-              <input type="text" placeholder="no phone">
-            </div>
-            <button type="submit" class="btn">kirim pesan</button>
+          <div class="input-group">
+            <i data-feather="user"></i>
+            <input type="text" id="name" placeholder="nama">
+          </div>
+          <div class="input-group">
+            <i data-feather="mail"></i>
+            <input type="text" id="email" placeholder="email">
+          </div>
+          <div class="input-group">
+            <i data-feather="message-circle"></i>
+            <input type="text" id="message" placeholder="pesan">
+          </div>
+          <button type="button" class="send-wa">Kirim Pesan</button>
           </form>
         </div>
       </section>
@@ -281,88 +282,6 @@
     <script>
       feather.replace();
     </script>
-
-    <!-- my javascript -->
-     <script>
-      const navbarNav = document.querySelector(".navbar-nav");
-      document.querySelector("#hamburger-menu").onclick = () => {
-      navbarNav.classList.toggle("active");
-      };
-    // klik diluar elemen
-      const hm = document.querySelector("#hamburger-menu");
-      const sb = document.querySelector("#search-button");
-      const sc = document.querySelector("#shopping-cart-button");
-
-      document.addEventListener("click", function(e) {
-      if(!hm.contains(e.target) && !navbarNav.contains(e.target)) {
-      navbarNav.classList.remove("active");
-      }
-
-      if(!sb.contains(e.target) && !searchForm.contains(e.target)) {
-      searchForm.classList.remove("active");
-      }
-
-      if (!sc.contains(e.target) && !shoppingCart.contains(e.target)) {
-      shoppingCart.classList.remove("active");
-      }
-      });
-      </script>
-
-      <script>
-      // toggle class active navbar search form
-      const searchForm = document.querySelector(".search-form");
-
-      // ketika search menu diklik
-      document.querySelector("#search-button").onclick = (e) => {
-      searchForm.classList.toggle("active");
-      searchBox.focus();
-      e.preventDefault();
-      };
-
-      // klik diluar side bar untuk menghilangkan search
-      const searchBox = document.querySelector("#search-box");
-
-      document.addEventListener("click", function (e) {
-      if (!search.contains(e.target) && !searchForm.contains(e.target)) {
-      searchForm.classList.remove("active");
-      }
-      });
-
-      // toggle class active untuk shoppin-cart
-      const shoppingCart = document.querySelector(".shopping-cart");
-      document.querySelector("#shopping-cart-button").onclick = (e) => {
-        shoppingCart.classList.toggle("active");
-        e.preventDefault();
-        };
-      
-        // toggle modal section
-      const itemDetailModal = document.querySelector("#item-detail-modal");
-      const itemDetailButtons = document.querySelectorAll(".item-detail-button");
-
-        // loopin
-      itemDetailButtons.forEach((btn) => {
-       btn.addEventListener("click", function (e) {
-        itemDetailModal.style.display = "flex";
-        e.preventDefault();
-        });
-      });
-
-      // klik tombol close modal box
-      document.querySelector(".modal .close-icon").onclick = (e) => {
-        itemDetailModal.style.display = "none";
-        e.preventDefault();
-      };
-      // klik diluar modal
-      const modal = document.querySelector("#item-detail-modal");
-      window.onclick = (e) => {
-        if (e.target === modal) {
-        modal.style.display = "none";
-        }
-      };
-      </script>
-    
-
-
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

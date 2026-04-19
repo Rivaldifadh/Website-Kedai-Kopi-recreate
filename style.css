@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   --primary: #b6895b;
   --bg: #010101;
@@ -7,10 +13,14 @@
   margin: 0;
   padding: 0;
   max-width: 100%;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   outline: none;
-  border: none;
   text-decoration: none;
+}
+
+button,
+a {
+  border: none;
 }
 
 html {
@@ -29,7 +39,7 @@ body {
   align-items: center;
   padding: 1.4rem 7%;
   background-color: rgba(1, 1, 1, 0.8);
-  border-bottom: 1px solid #926c46;
+  /* border-bottom: 1px solid #926c46; */
   position: fixed;
   top: 0;
   left: 0;
@@ -38,10 +48,22 @@ body {
 }
 
 .navbar .navbar-logo {
+  position: relative;
   font-size: 2rem;
   font-weight: 700;
   color: #fff;
   font-style: italic;
+  animation: mymove 5s ease-in-out infinite alternate;
+  animation-duration: 2s;
+}
+
+@keyframes mymove {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 20px;
+  }
 }
 
 .navbar .navbar-logo span {
@@ -142,7 +164,7 @@ body {
   align-items: center;
   gap: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px dashed #666;
+  /* border-bottom: 1px dashed #666; */
   position: relative;
 }
 
@@ -202,6 +224,7 @@ body {
 }
 
 .hero .content h1 {
+  position: relative;
   font-size: 5em;
   color: #fff;
   text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
@@ -221,8 +244,11 @@ body {
   mix-blend-mode: difference;
 }
 
-.hero .content .cta {
-  margin-top: 1rem;
+/* =========
+   HERO CTA
+========= */
+.hero .content .cta-order {
+  margin-top: 2rem;
   display: inline-block;
   padding: 1rem 3rem;
   font-size: 1.4rem;
@@ -230,6 +256,27 @@ body {
   background-color: var(--primary);
   border-radius: 0.5rem;
   box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.4);
+
+  position: relative;
+  top: 10px;
+  opacity: 1;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* hover */
+.hero .content .cta-order:hover {
+  background-color: #e68900;
+  transform: translateY(-3px);
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* active (klik) */
+.hero .content .cta-order:active {
+  transform: scale(0.97);
 }
 
 /* about section */
@@ -279,11 +326,23 @@ body {
 }
 
 .about .row .content p {
+  position: relative;
   margin-bottom: 0.8rem;
   font-size: 1.4rem;
   font-weight: 100;
   line-height: 1.6;
+  animation: typing 4s steps(30) forwards;
 }
+
+@keyframes typing {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
 /* about section end */
 
 /* menu section */
@@ -345,22 +404,32 @@ body {
   margin-bottom: 2rem;
   color: #ccc;
   max-width: 600px;
-  margin-inline: auto;
+  /* margin-inline: auto; */
 }
 
 /* Kartu produk */
-.products .product-card {
+.row .product-card {
+  position: relative;
   text-align: center;
-  /* border: 1px solid #444; */
-  background-color: #1a1a1a;
-  border-radius: 10px;
+  background-color: transparent;
+  border-radius: 12px;
   padding: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* ⬅️ WAJIB agar isi tidak keluar border */
+
+  /* border diganti shadow tipis */
+  box-shadow: none;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .products .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  /* box-shadow: 0 0 0 1px var(--primary), 0 10px 20px rgba(0, 0, 0, 0.5); */
+}
+
+.products p {
+  text-align: center;
 }
 
 .products .product-icons a {
@@ -368,12 +437,14 @@ body {
   height: 40px;
   color: #fff;
   background-color: #333;
-  border: 1px solid #555;
+  /* border: 1px solid #555; */
   border-radius: 50%;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s ease, transform 0.2s;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s;
 }
 
 .products .product-icons a:hover {
@@ -382,16 +453,18 @@ body {
 }
 
 .products .product-image {
-  padding: 1rem 0;
+  padding: 0.8rem;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .products .product-image img {
   max-width: 100%;
-  height: auto;
+  height: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 1px solid #444;
-  border-radius: 8px;
+  border-radius: 50%;
+  display: block;
+  margin-inline: auto;
   transition: transform 0.3s ease;
 }
 
@@ -419,56 +492,109 @@ body {
 
 /* Product Section end */
 
-/* contact section start */
+/* ==========================
+   CONTACT SECTION
+========================== */
 .contact .row {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 2rem;
   background-color: #222;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
+/* MAP */
 .contact .row .map {
-  flex: 1 1 45;
+  flex: 1 1 45rem;
   width: 100%;
+  min-height: 350px;
   object-fit: cover;
 }
 
+/* FORM */
 .contact .row form {
   flex: 1 1 45rem;
-  padding: 5rem 2rem;
+  padding: 4rem 3rem;
   text-align: center;
 }
 
+.contact .row form h3 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+/* INPUT GROUP */
 .contact .row form .input-group {
   display: flex;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   background-color: var(--bg);
-  border: 1px solid #eee;
-  padding-left: 2rem;
+  border-radius: 0.5rem;
+  padding-left: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.contact .row form .input-group i {
+  font-size: 1.6rem;
+  color: #aaa;
+}
+
+/* INPUT */
+/* ===== FIX INPUT FOCUS ===== */
 .contact .row form .input-group input {
-  width: 100%;
-  padding: 2rem;
-  font-size: 1.7rem;
-  background: none;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  font-size: 1.5rem;
+}
+
+/* saat fokus */
+.contact .row form .input-group input:focus {
+  background-color: transparent;
   color: #fff;
 }
 
-.contact .row form .btn {
+/* hilangkan autofill putih (Chrome) */
+.contact .row form .input-group input:-webkit-autofill,
+.contact .row form .input-group input:-webkit-autofill:hover,
+.contact .row form .input-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* optional: fokus border tetap halus */
+.contact .row form .input-group:focus-within {
+  border-color: var(--primary);
+  background-color: var(--bg);
+}
+
+/* BUTTON */
+.contact .row form .send-wa {
   margin-top: 3rem;
   display: inline-block;
-  padding: 1rem 3rem;
-  font-size: 1.7rem;
+  padding: 1.2rem 3.5rem;
+  font-size: 1.6rem;
   color: #fff;
   background-color: var(--primary);
+  border-radius: 0.5rem;
   cursor: pointer;
+  border: none;
+  transition: 0.3s ease;
 }
+
+.contact .row form .send-wa:hover {
+  background-color: #e68900;
+}
+
 /* contact section end */
 
 /* footer */
 footer {
-  background-color: var(--primary);
+  background: linear-gradient(45deg, #e68900, #c07b2d);
   text-align: center;
   padding: 1rem 0 3rem;
   margin-top: 3rem;
@@ -527,7 +653,7 @@ footer .credit a {
   color: var(--bg);
   margin: 15% auto;
   padding: 1.2rem;
-  border: 1px solid #666;
+  /* border: 1px solid #666; */
   width: 80%;
   animation: animateModal 0.5s;
 }
@@ -691,7 +817,6 @@ footer .credit a {
   }
 
   .shopping-cart {
-    width: 90%;
-    right: -100%;
+    display: inline-block;
   }
 }
